@@ -14,6 +14,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 
 public class SpringXmlBeanProvider implements BeanProvider {
@@ -118,7 +119,7 @@ public class SpringXmlBeanProvider implements BeanProvider {
       }
       //attempt to load each configured inputstream
       for (InputStream is : inputStreams) {
-        File f = File.createTempFile("XmlBeanProvider", "resource");
+        File f = Files.createTempFile("XmlBeanProvider", "resource").toFile();
         OutputStream fos = new FileOutputStream(f);
         StreamUtils.writeUntilEOF(is, fos);
         fos.close();

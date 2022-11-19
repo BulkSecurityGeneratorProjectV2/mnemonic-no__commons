@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.Properties;
 
@@ -57,7 +58,7 @@ public class PropertiesResolverTest {
   private File createPropertyFile(String id, Map<String, String> entries) throws IOException {
     Properties props = new Properties();
     map(entries).forEach(props::setProperty);
-    File propsFile = File.createTempFile(getClass().getName(), "-" + id);
+    File propsFile = Files.createTempFile(getClass().getName(), "-" + id).toFile();
     props.store(new FileOutputStream(propsFile), "");
     return propsFile;
   }

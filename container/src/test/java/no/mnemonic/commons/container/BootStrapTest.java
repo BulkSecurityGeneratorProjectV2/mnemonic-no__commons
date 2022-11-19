@@ -12,6 +12,7 @@ import org.mockito.MockitoAnnotations;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Map;
 import java.util.Properties;
 import java.util.function.Consumer;
@@ -87,7 +88,7 @@ public class BootStrapTest {
   private File createPropertyFile(String id, String key, String value) throws IOException {
     Properties props = new Properties();
     props.put(key, value);
-    File propsFile = File.createTempFile(getClass().getName(), "-" + id);
+    File propsFile = Files.createTempFile(getClass().getName(), "-" + id).toFile();
     props.store(new FileOutputStream(propsFile), "");
     return propsFile;
   }
